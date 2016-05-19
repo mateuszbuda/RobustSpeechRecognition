@@ -14,3 +14,22 @@ Noise types included:
 - babble
 - car
 - exhibition
+
+### validation set ###
+
+Makes up 11% of the original training set.
+
+Extracted with:
+
+```
+$ awk '/\/FA/||/\/FB/||/\/MA/||/\/MB/' train.lst > train_va.lst
+$ awk '!/\/FA/&&!/\/FB/&&!/\/MA/&&!/\/MB/' train.lst > train_tr.lst
+```
+
+```
+$ wc -l train_va.lst 
+     739 train_va.lst
+
+$ wc -l train_tr.lst
+    6013 train_tr.lst
+````
