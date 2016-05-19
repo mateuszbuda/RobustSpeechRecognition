@@ -1,2 +1,28 @@
 # RobustSpeechRecognition
-An Investigation Of Deep Neural Networks For Noise Robust Speech Recognition
+[An Investigation Of Deep Neural Networks For Noise Robust Speech Recognition](http://research.microsoft.com/pubs/194344/0007398.pdf)
+
+Recently, a new acoustic model based on deep neural networks (DNN) has been
+introduced. While the DNN has generated significant improvements over GMM-based
+systems on several tasks, there has been no evaluation of the robustness of such
+systems to environmental distortion. In this paper, we investigate the noise
+robustness of DNN-based acoustic models and find that they can match state-of-
+the-art performance on the Aurora 4 task without any explicit noise
+compensation. This performance can be further improved by incorporating
+information about the environment into DNN training using a new method called
+noise-aware training. When combined with the recently proposed dropout training
+technique, a 7.5% relative improvement over the previously best published result
+on this task is achieved using only a single decoding pass and no additional
+decoding complexity compared to a standard DNN.
+
+```
+@INPROCEEDINGS{6639100, 
+author={M. L. Seltzer and D. Yu and Y. Wang}, 
+booktitle={2013 IEEE International Conference on Acoustics, Speech and Signal Processing}, 
+title={An investigation of deep neural networks for noise robust speech recognition}, 
+year={2013}, 
+pages={7398-7402}, 
+keywords={neural nets;speech recognition;Aurora 4 task;DNN-based acoustic models;GMM-based systems;decoding complexity;deep neural networks;environmental distortion;noise compensation;noise robust speech recognition;noise-aware training;single decoding pass;Hidden Markov models;Noise;Noise robustness;Speech;Speech recognition;Training;Aurora 4;adaptive training;deep neural network;noise robustness}, 
+doi={10.1109/ICASSP.2013.6639100}, 
+ISSN={1520-6149}, 
+month={May},}
+```

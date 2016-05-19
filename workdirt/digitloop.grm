@@ -1,0 +1,2 @@
+$digit = oh | zero | one | two | three | four | five | six | seven | eight | nine;
+(SENT-START <$digit> SENT-END )
