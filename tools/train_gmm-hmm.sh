@@ -1,15 +1,15 @@
 #!/bin/bash
-# Training script for the TIDIGIT database. Starts with models with a single
+# Training script for the Aurora database. Starts with models with a single
 # Gaussian per state and incrementally doubles the number of Gaussians and
 # retrains the models.
-# Used for Lab 3 in the DT2118 Speech and Speaker Recognition course.
+# Used for Project in the DT2118 Speech and Speaker Recognition course.
 #
 # Usage:
 # ./train_gmm-hmm.sh feature_code
 # Example:
 # ./train_gmm-hmm.sh MFCC_0
 #
-# Note: it takes about 11 minutes to run on a i5 processor at 2.5GHz
+# Note: it takes about 10 minutes to run on a i5 processor at 2.5GHz
 #
 # (C) 2015 Giampiero Salvi <giampi@kth.se>
 function recho {

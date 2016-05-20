@@ -1,0 +1,54 @@
+VERSION=1.0
+N=16   L=36   
+I=0    W=SENT-END            
+I=1    W=nine                
+I=2    W=!NULL               
+I=3    W=eight               
+I=4    W=seven               
+I=5    W=six                 
+I=6    W=five                
+I=7    W=four                
+I=8    W=three               
+I=9    W=two                 
+I=10   W=one                 
+I=11   W=zero                
+I=12   W=oh                  
+I=13   W=SENT-START          
+I=14   W=!NULL               
+I=15   W=!NULL               
+J=0     S=2    E=0    
+J=1     S=2    E=1    
+J=2     S=13   E=1    
+J=3     S=1    E=2    
+J=4     S=3    E=2    
+J=5     S=4    E=2    
+J=6     S=5    E=2    
+J=7     S=6    E=2    
+J=8     S=7    E=2    
+J=9     S=8    E=2    
+J=10    S=9    E=2    
+J=11    S=10   E=2    
+J=12    S=11   E=2    
+J=13    S=12   E=2    
+J=14    S=2    E=3    
+J=15    S=13   E=3    
+J=16    S=2    E=4    
+J=17    S=13   E=4    
+J=18    S=2    E=5    
+J=19    S=13   E=5    
+J=20    S=2    E=6    
+J=21    S=13   E=6    
+J=22    S=2    E=7    
+J=23    S=13   E=7    
+J=24    S=2    E=8    
+J=25    S=13   E=8    
+J=26    S=2    E=9    
+J=27    S=13   E=9    
+J=28    S=2    E=10   
+J=29    S=13   E=10   
+J=30    S=2    E=11   
+J=31    S=13   E=11   
+J=32    S=2    E=12   
+J=33    S=13   E=12   
+J=34    S=15   E=13   
+J=35    S=0    E=14   

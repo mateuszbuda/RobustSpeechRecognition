@@ -1,10 +1,10 @@
 #!/bin/bash
-# Data preparation for training and testing on the TIDIGIT database. Creates:
+# Data preparation for training and testing on the Aurora database. Creates:
 # - lists of relevant files,
-# - orthographic labels based on the TIDIGIT filenames,
+# - orthographic labels based on the Aurora filenames,
 # - phonetic labels based on a dictionary
 # - a loop-of-digit grammar
-# Used for Lab 3 in the DT2118 Speech and Speaker Recognition course.
+# Used for Project in the DT2118 Speech and Speaker Recognition course.
 #
 # Usage:
 # ./prepare_data.sh
@@ -72,8 +72,8 @@ echo "SENT-START [] sil" > workdirt/recdict.dic
 echo "SENT-END [] sil" >> workdirt/recdict.dic
 cat workdirt/pron1.dic >> workdirt/recdict.dic
 
-cat workdirt/pron1.dic >> workdir1/recdict.dic
-cat workdirt/pron1.dic >> workdir2/recdict.dic
-cat workdirt/pron1.dic >> workdir3/recdict.dic
-cat workdirt/pron1.dic >> workdir4/recdict.dic
+cat workdirt/recdict.dic > workdir1/recdict.dic
+cat workdirt/recdict.dic > workdir2/recdict.dic
+cat workdirt/recdict.dic > workdir3/recdict.dic
+cat workdirt/recdict.dic > workdir4/recdict.dic
 recho "Finished."

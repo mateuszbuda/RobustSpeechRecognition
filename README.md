@@ -30,12 +30,11 @@ month={May},}
 
 ### Prerequisites ###
 
-- Aurora data in the main directory.
+- Aurora dataset in the main directory.
 
 - `workdirt/train.lst`
 
 - `workdir{1-4}/test.lst`
-
 
 
 ### Dependencies ##
@@ -43,25 +42,56 @@ month={May},}
 See `tools/modules_tegner`.
 
 
-### Steps ###
+### Data ###
 
 ```
 tools/prepare_data.sh
 ```
 
-```
-features=MFCC_0_D_A_Z
-```
+Should output:
+
+- `workdirt/digitloop.grm`
+- `workdirt/digitloop.lat`
+- `workdirt/phones0.lst`
+- `workdirt/phones1.lst`
+- `workdirt/pron1.dic`
+- `workdirt/recdict.dic`
+- `workdirt/train_phone0.mlf`
+- `workdirt/train_phone1.mlf`
+- `workdirt/train_word.mlf`
+- `workdirt/words.lst`
+- `workdir{1-4}/phones0.lst`
+- `workdir{1-4}/phones1.lst`
+- `workdir{1-4}/pron1.dic`
+- `workdir{1-4}/recdict.dic`
+- `workdir{1-4}/test_word.mlf`
 
 ```
+features=MFCC_0_D_A_Z
 tools/train_g-hmm.sh $features
 ```
+
+Should output:
+
+- `models_MFCC_0_D_A_Z/proto`
+- `models_MFCC_0_D_A_Z/hmm{1-7}/`
+
 
 ```
 tools/train_gmm-hmm.sh $features
 ```
 
+Should output:
+
+- `models_MFCC_0_D_A_Z/hmm{8-19}/`
+
 ```
 tools/forced_align_states.sh $features
 ```
+
+Should output:
+
+- `workdirt/train_tr_align.mlf`
+- `workdirt/train_va_align.mlf`
+- `workdir{1-4}/test_align.mlf`
 

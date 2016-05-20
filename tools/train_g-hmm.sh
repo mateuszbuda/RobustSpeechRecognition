@@ -1,5 +1,5 @@
 #!/bin/bash
-# Training script for the TIDIGIT database. Performs flat-start initialization
+# Training script for the Aurora database. Performs flat-start initialization
 # and a number of iterations of Embedded Baum-Welch training. Used for Lab 3
 # in the DT2118 Speech and Speaker Recognition course.
 #
@@ -8,7 +8,7 @@
 # Example:
 # ./train_g-hmm.sh MFCC_0
 #
-# Note: it takes about 6 minutes to run on a i5 processor at 2.5GHz
+# Note: it takes about 5 minutes to run on a i5 processor at 2.5GHz
 #
 # (C) 2015 Giampiero Salvi <giampi@kth.se>
 function recho {

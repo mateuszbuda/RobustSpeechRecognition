@@ -1,15 +1,15 @@
 #!/bin/bash
-# Forced Alignment on the training set of the TIDIGIT database. Performs Viterbi
+# Forced Alignment on the training set of the Aurora database. Performs Viterbi
 # decoding using the orthographic transcriptions and returns time-aligned phonetic
 # transriptions. It uses the GMM-HMM models trained by train_mixup.sh
-# Used for Lab 3 in the DT2118 Speech and Speaker Recognition course.
+# Used for Project in the DT2118 Speech and Speaker Recognition course.
 #
 # Usage:
 # ./forced_align.sh feature_code
 # Example:
-# ./forced_align.sh MFCC_0_D_A
+# ./forced_align.sh MFCC_0_D_A_Z
 #
-# Note: it takes about 5 minutes to run on a i5 processor at 2.5GHz
+# Note: it takes about 15 minutes to run on a i5 processor at 2.5GHz
 #
 # (C) 2015 Giampiero Salvi <giampi@kth.se>
 function recho {
