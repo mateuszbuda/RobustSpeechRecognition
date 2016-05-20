@@ -26,3 +26,42 @@ doi={10.1109/ICASSP.2013.6639100},
 ISSN={1520-6149}, 
 month={May},}
 ```
+
+
+### Prerequisites ###
+
+- Aurora data in the main directory.
+
+- `workdirt/train.lst`
+
+- `workdir{1-4}/test.lst`
+
+
+
+### Dependencies ##
+
+See `tools/modules_tegner`.
+
+
+### Steps ###
+
+```
+tools/prepare_data.sh
+```
+
+```
+features=MFCC_0_D_A_Z
+```
+
+```
+tools/train_g-hmm.sh $features
+```
+
+```
+tools/train_gmm-hmm.sh $features
+```
+
+```
+tools/forced_align_states.sh $features
+```
+
