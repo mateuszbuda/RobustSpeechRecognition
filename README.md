@@ -111,3 +111,9 @@ tools/htk2pfile.py workdir3/test_align.mlf workdirt/state2id.lst FBANK workdir3/
 tools/htk2pfile.py workdir4/test_align.mlf workdirt/state2id.lst FBANK workdir4/test_FBANK.pfile
 ```
 
+```
+./tools/normutts.sh workdirt/train_tr_FBANK.pfile workdirt/train_va_FBANK.pfile 
+./tools/normutts.sh workdir1/test_FBANK.pfile workdir2/test_FBANK.pfile workdir3/test_FBANK.pfile workdir4/test_FBANK.pfile
+```
+
+
