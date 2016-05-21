@@ -95,3 +95,19 @@ Should output:
 - `workdirt/train_va_align.mlf`
 - `workdir{1-4}/test_align.mlf`
 
+
+### Feature Extraction ###
+
+```
+tools/phones2stateid.py workdirt/phones1.lst > workdirt/state2id.lst
+```
+
+```
+tools/htk2pfile.py workdirt/train_tr_align.mlf workdirt/state2id.lst FBANK workdirt/train_tr_FBANK.pfile
+tools/htk2pfile.py workdirt/train_va_align.mlf workdirt/state2id.lst FBANK workdirt/train_va_FBANK.pfile
+tools/htk2pfile.py workdir1/test_align.mlf workdirt/state2id.lst FBANK workdir1/test_FBANK.pfile
+tools/htk2pfile.py workdir2/test_align.mlf workdirt/state2id.lst FBANK workdir2/test_FBANK.pfile
+tools/htk2pfile.py workdir3/test_align.mlf workdirt/state2id.lst FBANK workdir3/test_FBANK.pfile
+tools/htk2pfile.py workdir4/test_align.mlf workdirt/state2id.lst FBANK workdir4/test_FBANK.pfile
+```
+

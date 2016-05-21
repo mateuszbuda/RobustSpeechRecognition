@@ -9,7 +9,7 @@
 # In order to be useful, you also need to install the pfile tools:
 # - ftp://ftp.icsi.berkeley.edu/pub/real/davidj/quicknet.tar.gz
 # - http://www.icsi.berkeley.edu/ftp/pub/real/davidj/pfile_utils-v0_51.tar.gz
-# Used in Lab 3 in DT2118 Speech and Speaker Recognition
+# Used in Project in DT2118 Speech and Speaker Recognition
 #
 # Usage:
 # ./htk2pfile.py input.mlf states2ids.lst <feature_kind> out.pfile
@@ -36,7 +36,7 @@ def rows2labels(rows):
 
 def raw2labels(rawlabels):
     rows = rawlabels.rstrip().split('\n')
-    fname = rows[0].strip('\"').replace('.rec', '.wav')
+    fname = rows[0].strip('\"').replace('.rec', '.08')
     return fname, rows2labels(rows[1:])
 
 mlffilename = sys.argv[1]
@@ -63,14 +63,13 @@ nutts = len(rawlabels)
 
 for sent_no in range(nutts):
     fname, labels = raw2labels(rawlabels[sent_no])
+    print(htkcmd + fname)
     htkp = subprocess.Popen(htkcmd+fname, shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
     features = np.loadtxt(htkp.stdout)
     nframes, nfeatures = features.shape
     if pfilecmd == '':
         pfilecmd = 'pfile_create -i - -o '+outputfilename+' -f '+str(nfeatures)+' -l 1'
-        #pfilecmd = 'cat'
         pfilep = subprocess.Popen(pfilecmd, shell=True, stdin=subprocess.PIPE)
-        #print('Producing a (x, y) dataset file for: '+mlffilename, file=pfilep.stdin)
     print('processing '+fname, file=sys.stderr)
     labarr = []
     for start, end, phone, state in labels:
@@ -79,6 +78,7 @@ for sent_no in range(nutts):
             labarr.append(stateid)
     if len(labarr) != nframes:
         print("Warning: length mismatch, nframes=%d, nlabels=%d", nframes, len(labarr), file=sys.stderr)
+        nframes = min(len(labarr), nframes)
         labarr = labarr[0:nframes]
     for frame_no in range(nframes):
         row = str(sent_no)+' '+str(frame_no)+' '+' '.join(map(str, features[frame_no,:]))+' '+labarr[frame_no]
