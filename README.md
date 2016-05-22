@@ -117,3 +117,60 @@ tools/htk2pfile.py workdir4/test_align.mlf workdirt/state2id.lst FBANK workdir4/
 ```
 
 
+### Tegner ###
+
+Authentication with kerberos:
+
+```
+kinit -f -l 7d <username>@NADA.KTH.SE
+```
+
+Send `.pfile` files with training and test data together with other necessary files to tegner:
+
+```
+mkdir data
+mv workdirt/*.pfile data/
+mv workdir1/test_FBANK.pfile data/test1_FBANK.pfile
+mv workdir2/test_FBANK.pfile data/test2_FBANK.pfile
+mv workdir3/test_FBANK.pfile data/test3_FBANK.pfile
+mv workdir4/test_FBANK.pfile data/test4_FBANK.pfile
+```
+
+```
+ssh <username>@tegner.pdc.kth.se "mkdir /cfs/klemming/nobackup/<u>/<username>/data/"
+scp data/train* <username>@tegner.pdc.kth.se:/cfs/klemming/nobackup/<u>/<username>/data/
+scp data/test1_FBANK.pfile <username>@tegner.pdc.kth.se:/cfs/klemming/nobackup/<u>/<username>/data/
+scp data/test2_FBANK.pfile <username>@tegner.pdc.kth.se:/cfs/klemming/nobackup/<u>/<username>/data/
+scp data/test3_FBANK.pfile <username>@tegner.pdc.kth.se:/cfs/klemming/nobackup/<u>/<username>/data/
+scp data/test4_FBANK.pfile <username>@tegner.pdc.kth.se:/cfs/klemming/nobackup/<u>/<username>/data/
+scp tools/modules_tegner <username>@tegner.pdc.kth.se:~/
+```
+
+Login to tegner:
+
+```
+ssh -Y <username>@tegner.pdc.kth.se
+```
+
+Every time you login to tegner you need to load appropriate modules calling:
+
+```
+source modules_tegner
+```
+
+Setup Theano.
+In your homedir create `.theanorc` file with the following content:
+
+```
+[global]
+device = gpu0
+floatX = float32
+[nvcc]
+fastmath = True
+```
+
+
+### Training and testing DNN ###
+
+
+
