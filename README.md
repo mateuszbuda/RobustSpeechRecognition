@@ -103,17 +103,17 @@ tools/phones2stateid.py workdirt/phones1.lst > workdirt/state2id.lst
 ```
 
 ```
-tools/htk2pfile.py workdirt/train_tr_align.mlf workdirt/state2id.lst FBANK workdirt/train_tr_FBANK.pfile
-tools/htk2pfile.py workdirt/train_va_align.mlf workdirt/state2id.lst FBANK workdirt/train_va_FBANK.pfile
-tools/htk2pfile.py workdir1/test_align.mlf workdirt/state2id.lst FBANK workdir1/test_FBANK.pfile
-tools/htk2pfile.py workdir2/test_align.mlf workdirt/state2id.lst FBANK workdir2/test_FBANK.pfile
-tools/htk2pfile.py workdir3/test_align.mlf workdirt/state2id.lst FBANK workdir3/test_FBANK.pfile
-tools/htk2pfile.py workdir4/test_align.mlf workdirt/state2id.lst FBANK workdir4/test_FBANK.pfile
+tools/htk2pfile.py workdirt/train_tr_align.mlf workdirt/state2id.lst FBANK_D_A workdirt/train_tr_FBANK_D_A.pfile
+tools/htk2pfile.py workdirt/train_va_align.mlf workdirt/state2id.lst FBANK_D_A workdirt/train_va_FBANK_D_A.pfile
+tools/htk2pfile.py workdir1/test_align.mlf workdirt/state2id.lst FBANK_D_A workdir1/test_FBANK_D_A.pfile
+tools/htk2pfile.py workdir2/test_align.mlf workdirt/state2id.lst FBANK_D_A workdir2/test_FBANK_D_A.pfile
+tools/htk2pfile.py workdir3/test_align.mlf workdirt/state2id.lst FBANK_D_A workdir3/test_FBANK_D_A.pfile
+tools/htk2pfile.py workdir4/test_align.mlf workdirt/state2id.lst FBANK_D_A workdir4/test_FBANK_D_A.pfile
 ```
 
 ```
-./tools/normutts.sh workdirt/train_tr_FBANK.pfile workdirt/train_va_FBANK.pfile 
-./tools/normutts.sh workdir1/test_FBANK.pfile workdir2/test_FBANK.pfile workdir3/test_FBANK.pfile workdir4/test_FBANK.pfile
+./tools/normutts.sh workdirt/train_tr_FBANK_D_A.pfile workdirt/train_va_FBANK_D_A.pfile 
+./tools/normutts.sh workdir1/test_FBANK_D_A.pfile workdir2/test_FBANK_D_A.pfile workdir3/test_FBANK_D_A.pfile workdir4/test_FBANK_D_A.pfile
 ```
 
 
@@ -122,7 +122,7 @@ tools/htk2pfile.py workdir4/test_align.mlf workdirt/state2id.lst FBANK workdir4/
 Authentication with kerberos:
 
 ```
-kinit -f -l 7d <username>@NADA.KTH.SE
+kinit -f -l 7d buda@NADA.KTH.SE
 ```
 
 Send `.pfile` files with training and test data together with other necessary files to tegner:
@@ -130,32 +130,27 @@ Send `.pfile` files with training and test data together with other necessary fi
 ```
 mkdir data
 mv workdirt/*.pfile data/
-mv workdir1/test_FBANK.pfile data/test1_FBANK.pfile
-mv workdir2/test_FBANK.pfile data/test2_FBANK.pfile
-mv workdir3/test_FBANK.pfile data/test3_FBANK.pfile
-mv workdir4/test_FBANK.pfile data/test4_FBANK.pfile
+mv workdir1/test_FBANK_D_A.pfile data/test1_FBANK_D_A.pfile
+mv workdir2/test_FBANK_D_A.pfile data/test2_FBANK_D_A.pfile
+mv workdir3/test_FBANK_D_A.pfile data/test3_FBANK_D_A.pfile
+mv workdir4/test_FBANK_D_A.pfile data/test4_FBANK_D_A.pfile
 ```
 
 ```
-ssh <username>@tegner.pdc.kth.se "mkdir /cfs/klemming/nobackup/<u>/<username>/data/"
-scp data/train* <username>@tegner.pdc.kth.se:/cfs/klemming/nobackup/<u>/<username>/data/
-scp data/test1_FBANK.pfile <username>@tegner.pdc.kth.se:/cfs/klemming/nobackup/<u>/<username>/data/
-scp data/test2_FBANK.pfile <username>@tegner.pdc.kth.se:/cfs/klemming/nobackup/<u>/<username>/data/
-scp data/test3_FBANK.pfile <username>@tegner.pdc.kth.se:/cfs/klemming/nobackup/<u>/<username>/data/
-scp data/test4_FBANK.pfile <username>@tegner.pdc.kth.se:/cfs/klemming/nobackup/<u>/<username>/data/
-scp tools/modules_tegner <username>@tegner.pdc.kth.se:~/
+ssh buda@tegner.pdc.kth.se "mkdir /cfs/klemming/nobackup/b/buda/data/"
+scp data/train* buda@tegner.pdc.kth.se:/cfs/klemming/nobackup/b/buda/data/
+scp data/test1_FBANK_D_A.pfile buda@tegner.pdc.kth.se:/cfs/klemming/nobackup/b/buda/data/
+scp data/test2_FBANK_D_A.pfile buda@tegner.pdc.kth.se:/cfs/klemming/nobackup/b/buda/data/
+scp data/test3_FBANK_D_A.pfile buda@tegner.pdc.kth.se:/cfs/klemming/nobackup/b/buda/data/
+scp data/test4_FBANK_D_A.pfile buda@tegner.pdc.kth.se:/cfs/klemming/nobackup/b/buda/data/
+scp tools/modules_tegner buda@tegner.pdc.kth.se:/cfs/klemming/nobackup/b/buda/
+scp job.sh buda@tegner.pdc.kth.se:/cfs/klemming/nobackup/b/buda/
 ```
 
 Login to tegner:
 
 ```
-ssh -Y <username>@tegner.pdc.kth.se
-```
-
-Every time you login to tegner you need to load appropriate modules calling:
-
-```
-source modules_tegner
+ssh -Y buda@tegner.pdc.kth.se
 ```
 
 Setup Theano.
