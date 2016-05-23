@@ -103,12 +103,12 @@ tools/phones2stateid.py workdirt/phones1.lst > workdirt/state2id.lst
 ```
 
 ```
-tools/htk2pfile.py workdirt/train_tr_align.mlf workdirt/state2id.lst FBANK_D_A workdirt/train_tr_FBANK_D_A.pfile
-tools/htk2pfile.py workdirt/train_va_align.mlf workdirt/state2id.lst FBANK_D_A workdirt/train_va_FBANK_D_A.pfile
-tools/htk2pfile.py workdir1/test_align.mlf workdirt/state2id.lst FBANK_D_A workdir1/test_FBANK_D_A.pfile
-tools/htk2pfile.py workdir2/test_align.mlf workdirt/state2id.lst FBANK_D_A workdir2/test_FBANK_D_A.pfile
-tools/htk2pfile.py workdir3/test_align.mlf workdirt/state2id.lst FBANK_D_A workdir3/test_FBANK_D_A.pfile
-tools/htk2pfile.py workdir4/test_align.mlf workdirt/state2id.lst FBANK_D_A workdir4/test_FBANK_D_A.pfile
+python tools/htk2pfile.py workdirt/train_tr_align.mlf workdirt/state2id.lst FBANK_D_A workdirt/train_tr_FBANK_D_A.pfile
+python tools/htk2pfile.py workdirt/train_va_align.mlf workdirt/state2id.lst FBANK_D_A workdirt/train_va_FBANK_D_A.pfile
+python tools/htk2pfile.py workdir1/test_align.mlf workdirt/state2id.lst FBANK_D_A workdir1/test_FBANK_D_A.pfile
+python tools/htk2pfile.py workdir2/test_align.mlf workdirt/state2id.lst FBANK_D_A workdir2/test_FBANK_D_A.pfile
+python tools/htk2pfile.py workdir3/test_align.mlf workdirt/state2id.lst FBANK_D_A workdir3/test_FBANK_D_A.pfile
+python tools/htk2pfile.py workdir4/test_align.mlf workdirt/state2id.lst FBANK_D_A workdir4/test_FBANK_D_A.pfile
 ```
 
 ```
@@ -122,7 +122,7 @@ tools/htk2pfile.py workdir4/test_align.mlf workdirt/state2id.lst FBANK_D_A workd
 Authentication with kerberos:
 
 ```
-kinit -f -l 7d buda@NADA.KTH.SE
+kinit -f -l 7d <username>@NADA.KTH.SE
 ```
 
 Send `.pfile` files with training and test data together with other necessary files to tegner:
@@ -137,20 +137,22 @@ mv workdir4/test_FBANK_D_A.pfile data/test4_FBANK_D_A.pfile
 ```
 
 ```
-ssh buda@tegner.pdc.kth.se "mkdir /cfs/klemming/nobackup/b/buda/data/"
-scp data/train* buda@tegner.pdc.kth.se:/cfs/klemming/nobackup/b/buda/data/
-scp data/test1_FBANK_D_A.pfile buda@tegner.pdc.kth.se:/cfs/klemming/nobackup/b/buda/data/
-scp data/test2_FBANK_D_A.pfile buda@tegner.pdc.kth.se:/cfs/klemming/nobackup/b/buda/data/
-scp data/test3_FBANK_D_A.pfile buda@tegner.pdc.kth.se:/cfs/klemming/nobackup/b/buda/data/
-scp data/test4_FBANK_D_A.pfile buda@tegner.pdc.kth.se:/cfs/klemming/nobackup/b/buda/data/
-scp tools/modules_tegner buda@tegner.pdc.kth.se:/cfs/klemming/nobackup/b/buda/
-scp job.sh buda@tegner.pdc.kth.se:/cfs/klemming/nobackup/b/buda/
+ssh <username>@tegner.pdc.kth.se "mkdir /cfs/klemming/nobackup/<u>/<username>/data/"
+scp data/train* <username>@tegner.pdc.kth.se:/cfs/klemming/nobackup/<u>/<username>/data/
+scp data/test1_FBANK_D_A.pfile <username>@tegner.pdc.kth.se:/cfs/klemming/nobackup/<u>/<username>/data/
+scp data/test2_FBANK_D_A.pfile <username>@tegner.pdc.kth.se:/cfs/klemming/nobackup/<u>/<username>/data/
+scp data/test3_FBANK_D_A.pfile <username>@tegner.pdc.kth.se:/cfs/klemming/nobackup/<u>/<username>/data/
+scp data/test4_FBANK_D_A.pfile <username>@tegner.pdc.kth.se:/cfs/klemming/nobackup/<u>/<username>/data/
+scp tools/modules_tegner <username>@tegner.pdc.kth.se:/cfs/klemming/nobackup/<u>/<username>/
+scp job.sh <username>@tegner.pdc.kth.se:/cfs/klemming/nobackup/<u>/<username>/
 ```
+
+Notice: `data/test2_FBANK_D_A.pfile` and `data/test4_FBANK_D_A.pfile` are over 1GB and `scp` fails to copy them to tegner. You need to generate them there. Clone the repository and run feature extraction part for them and then copy to the `~/data/` folder.
 
 Login to tegner:
 
 ```
-ssh -Y buda@tegner.pdc.kth.se
+ssh -Y <username>@tegner.pdc.kth.se
 ```
 
 Setup Theano.
@@ -165,7 +167,27 @@ fastmath = True
 ```
 
 
-### Training and testing DNN ###
+### Training DNNs ###
+
+If you followed the steps above and have both `modules_tegner` and `job.sh` in your homedir, then just run:
+
+```
+mkdir nnet1 nnet2
+sbatch job_train.sh
+```
+
+It trains two networks with 5 hidden layers with 2048 units each. The second network has additional dropout of 20% at each hidden layer. It runs 15 iterations with constant learning rate 0.16.
+
+Now wait for the learning to finish. The second step is to finetune the model.
+
+```
+sbatch job_finetune.sh
+```
+
+Finetuning takes the previously trained model and runs 10 more iterations with a learning rate 0.004.
+
+
+### Testing ###
 
 
 
