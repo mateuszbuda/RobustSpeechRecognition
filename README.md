@@ -176,7 +176,7 @@ mkdir nnet1 nnet2
 sbatch job.sh
 ```
 
-It trains two networks with 5 hidden layers with 2048 units each. The second network has additional dropout of 20% at each hidden layer. It runs 15 iterations with constant learning rate 0.16. Then it takes finetunes them with 10 more iterations with a learning rate 0.004.
+It trains two networks with 3 hidden layers with 2048 sigmoid units each. The second network has additional dropout of 20% at each hidden layer. It first runs 10 iterations of pre-training layer by layer in an unsupervised manner by treating each pair of layers as a RBM. Then it runs 15 iterations with constant learning rate equal to 0.16. Finally it finetunes both networks with 10 more iterations with a learning rate equal to 0.004.
 
 
 ### Testing ###
