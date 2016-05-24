@@ -38,7 +38,7 @@ source modules_tegner
 --cfg-output-file nnet1/nnet1.cfg \
 |& tee -a nnet1/nnet1.log) &
 
-(THEANO_FLAGS='device=gpu1' python $PDNNDIR/cmds/run_DNN.py \
+THEANO_FLAGS='device=gpu1' python $PDNNDIR/cmds/run_DNN.py \
 --train-data "data/train_tr_FBANK_D_A.pfile,context=5,random=true" \
 --valid-data "data/train_va_FBANK_D_A.pfile,context=5,random=true" \
 --nnet-spec "792:2048:2048:2048:2048:2048:64" \
@@ -50,4 +50,4 @@ source modules_tegner
 --dropout-factor 0.2,0.2,0.2,0.2,0.2 \
 --param-output-file nnet2/nnet2.mdl \
 --cfg-output-file nnet2/nnet2.cfg \
-|& tee -a nnet2/nnet2.log) &
+|& tee -a nnet2/nnet2.log
