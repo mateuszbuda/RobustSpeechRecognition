@@ -10,7 +10,7 @@
 #SBATCH --mail-type=ALL
 
 # Maximum job elapsed time should be indicated whenever possible
-#SBATCH -t 03:00:00
+#SBATCH -t 05:00:00
 
 # Number of nodes that will be reserved for a given job
 #SBATCH --nodes=1
@@ -36,6 +36,21 @@ source modules_tegner
 --batch-size 512 \
 --param-output-file nnet1/nnet1.mdl \
 --cfg-output-file nnet1/nnet1.cfg \
+|& tee -a nnet1/nnet1.log;
+
+THEANO_FLAGS='device=gpu0' python $PDNNDIR/cmds/run_DNN.py \
+--train-data "data/train_tr_FBANK_D_A.pfile,context=5,random=true" \
+--valid-data "data/train_va_FBANK_D_A.pfile,context=5,random=true" \
+--nnet-spec "792:2048:2048:2048:2048:2048:64" \
+--ptr-file nnet1/nnet1.mdl \
+--ptr-layer-number 5 \
+--wdir ./nnet1/ \
+--activation rectifier \
+--lrate="C:0.004:10" \
+--momentum 0.9 \
+--batch-size 512 \
+--param-output-file nnet1/nnet1.mdl \
+--cfg-output-file nnet1/nnet1.cfg \
 |& tee -a nnet1/nnet1.log) &
 
 THEANO_FLAGS='device=gpu1' python $PDNNDIR/cmds/run_DNN.py \
@@ -45,6 +60,22 @@ THEANO_FLAGS='device=gpu1' python $PDNNDIR/cmds/run_DNN.py \
 --wdir ./nnet2 \
 --activation rectifier \
 --lrate="C:0.16:15" \
+--momentum 0.9 \
+--batch-size 512 \
+--dropout-factor 0.2,0.2,0.2,0.2,0.2 \
+--param-output-file nnet2/nnet2.mdl \
+--cfg-output-file nnet2/nnet2.cfg \
+|& tee -a nnet2/nnet2.log;
+
+THEANO_FLAGS='device=gpu1' python $PDNNDIR/cmds/run_DNN.py \
+--train-data "data/train_tr_FBANK_D_A.pfile,context=5,random=true" \
+--valid-data "data/train_va_FBANK_D_A.pfile,context=5,random=true" \
+--nnet-spec "792:2048:2048:2048:2048:2048:64" \
+--ptr-file nnet2/nnet2.mdl \
+--ptr-layer-number 5 \
+--wdir ./nnet2/ \
+--activation rectifier \
+--lrate="C:0.004:10" \
 --momentum 0.9 \
 --batch-size 512 \
 --dropout-factor 0.2,0.2,0.2,0.2,0.2 \

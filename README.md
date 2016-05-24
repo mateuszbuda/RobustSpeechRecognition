@@ -173,18 +173,10 @@ If you followed the steps above and have both `modules_tegner` and `job.sh` in y
 
 ```
 mkdir nnet1 nnet2
-sbatch job_train.sh
+sbatch job.sh
 ```
 
-It trains two networks with 5 hidden layers with 2048 units each. The second network has additional dropout of 20% at each hidden layer. It runs 15 iterations with constant learning rate 0.16.
-
-Now wait for the learning to finish. The second step is to finetune the model.
-
-```
-sbatch job_finetune.sh
-```
-
-Finetuning takes the previously trained model and runs 10 more iterations with a learning rate 0.004.
+It trains two networks with 5 hidden layers with 2048 units each. The second network has additional dropout of 20% at each hidden layer. It runs 15 iterations with constant learning rate 0.16. Then it takes finetunes them with 10 more iterations with a learning rate 0.004.
 
 
 ### Testing ###
