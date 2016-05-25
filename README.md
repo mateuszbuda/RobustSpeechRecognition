@@ -144,8 +144,7 @@ scp data/test2_FBANK_D_A.pfile <username>@tegner.pdc.kth.se:/cfs/klemming/noback
 scp data/test3_FBANK_D_A.pfile <username>@tegner.pdc.kth.se:/cfs/klemming/nobackup/<u>/<username>/data/
 scp data/test4_FBANK_D_A.pfile <username>@tegner.pdc.kth.se:/cfs/klemming/nobackup/<u>/<username>/data/
 scp tools/modules_tegner <username>@tegner.pdc.kth.se:/cfs/klemming/nobackup/<u>/<username>/
-scp job_train.sh <username>@tegner.pdc.kth.se:/cfs/klemming/nobackup/<u>/<username>/
-scp job_test.sh <username>@tegner.pdc.kth.se:/cfs/klemming/nobackup/<u>/<username>/
+scp job.sh <username>@tegner.pdc.kth.se:/cfs/klemming/nobackup/<u>/<username>/
 ```
 
 Notice: `data/test2_FBANK_D_A.pfile` and `data/test4_FBANK_D_A.pfile` are over 1GB and `scp` fails to copy them to tegner. You need to generate them there. Clone the repository and run feature extraction part for them and then copy to the `~/data/` folder.
@@ -168,30 +167,23 @@ fastmath = True
 ```
 
 
-### Training DNNs ###
+### Training and testing DNNs ###
 
 If you followed the steps above and have both `modules_tegner` and `job.sh` in your homedir, then just run:
 
 ```
 mkdir nnet1 nnet2
-sbatch job_train.sh
+sbatch job.sh
 ```
 
-It trains two networks with 3 hidden layers with 2048 sigmoid units each.
+It trains two networks with 3 hidden layers with 2048 ReLU units each.
 The second network has additional dropout of 20% at each hidden layer.
-It first runs 10 iterations of pre-training layer by layer in an unsupervised manner by treating each pair of layers as a RBM.
-Then it runs 15 iterations with constant learning rate equal to 0.16.
-Finally it finetunes both networks with 10 more iterations with a learning rate equal to 0.004.
-For more details refer to `job_train.sh` script and [PDNN](https://www.cs.cmu.edu/~ymiao/pdnntk.html) documentation of [run_RBM](https://www.cs.cmu.edu/~ymiao/pdnntk/rbm.html) and [run_DNN](https://www.cs.cmu.edu/~ymiao/pdnntk/dnn.html).
+It runs 15 epochs of back propagation with constant learning rate equal to 0.16.
+Then it finetunes both networks with 10 more epochs with a learning rate equal to 0.004.
 
+For more details refer to `job.sh` script and [PDNN](https://www.cs.cmu.edu/~ymiao/pdnntk.html) documentation of [run_RBM](https://www.cs.cmu.edu/~ymiao/pdnntk/rbm.html) and [run_DNN](https://www.cs.cmu.edu/~ymiao/pdnntk/dnn.html).
 
-### Testing ###
+After the models are trained, it feeds them with data from test sets in `test{1-4}_FBANK_D_A.pfile` files.
 
-Assumes you have `test{1-4}_FBANK_D_A.pfile` test set files in `data/` folder. Then you just run
-
-```
-sbatch job_test.sh
-```
-
-For more details refer to `job_test.sh` script and [run_Extract_Feats](https://www.cs.cmu.edu/~ymiao/pdnntk/feat_ext.html) documentation.
+For more details refer to `job.sh` script and [run_Extract_Feats](https://www.cs.cmu.edu/~ymiao/pdnntk/feat_ext.html) documentation.
 
