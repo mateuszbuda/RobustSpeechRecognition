@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # The job name is used to determine the name of job output and error files
-#SBATCH -J RBM.DT2118
+#SBATCH -J train.DT2118
 
 # Set the time allocation to be charged
 #SBATCH -A edu16.DT2118
@@ -16,14 +16,16 @@
 #SBATCH --nodes=1
 
 
-#SBATCH -e error.log
-#SBATCH -o output.o
+#SBATCH -e error_train.log
+#SBATCH -o output_train.o
 
 #SBATCH --gres=gpu:K80:2
 
 # Run the executable file
 
+
 source modules_tegner
+
 
 (THEANO_FLAGS='device=gpu0' python $PDNNDIR/cmds/run_RBM.py \
 --train-data "data/train_tr_FBANK_D_A.pfile,context=5,random=true" \
