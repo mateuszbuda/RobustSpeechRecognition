@@ -4,6 +4,9 @@
 ### Custom ###
 Aurora
 *.pfile
+nnet1/
+nnet2/
+results/
 
 
 ### OSX ###

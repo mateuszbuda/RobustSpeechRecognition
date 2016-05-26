@@ -187,3 +187,81 @@ After the models are trained, it feeds them with data from test sets in `test{1-
 
 For more details refer to `job.sh` script and [run_Extract_Feats](https://www.cs.cmu.edu/~ymiao/pdnntk/feat_ext.html) documentation.
 
+
+### Getting trained models and results ###
+
+```
+scp -r <username>@tegner.pdc.kth.se:/cfs/klemming/nobackup/<b>/<username>/nnet1 .
+scp -r <username>@tegner.pdc.kth.se:/cfs/klemming/nobackup/<b>/<username>/nnet2 .
+mkdir results
+scp <username>@tegner.pdc.kth.se:/cfs/klemming/nobackup/<b>/<username>/nnet1.test* results/
+scp <username>@tegner.pdc.kth.se:/cfs/klemming/nobackup/<b>/<username>/nnet2.test* results/
+```
+
+
+### Evaluation and visualization ###
+
+```
+python tools/evaluate.py \
+--result results/nnet1.test1.classify.pickle.gz \
+--features data/test1_FBANK_D_A.pfile \
+--info "basline DNN, test set A"
+```
+```
+python tools/evaluate.py \
+--result results/nnet1.test2.classify.pickle.gz \
+--features data/test2_FBANK_D_A.pfile \
+--info "basline DNN, test set B"
+```
+```
+python tools/evaluate.py \
+--result results/nnet1.test3.classify.pickle.gz \
+--features data/test3_FBANK_D_A.pfile \
+--info "basline DNN, test set C"
+```
+```
+python tools/evaluate.py \
+--result results/nnet1.test4.classify.pickle.gz \
+--features data/test4_FBANK_D_A.pfile \
+--info "basline DNN, test set D"
+```
+```
+python tools/evaluate.py \
+--result results/nnet2.test1.classify.pickle.gz \
+--features data/test1_FBANK_D_A.pfile \
+--info "DNN with dropout, test set A"
+```
+```
+python tools/evaluate.py \
+--result results/nnet2.test2.classify.pickle.gz \
+--features data/test2_FBANK_D_A.pfile \
+--info "DNN with dropout, test set B"
+```
+```
+python tools/evaluate.py \
+--result results/nnet2.test3.classify.pickle.gz \
+--features data/test3_FBANK_D_A.pfile \
+--info "DNN with dropout, test set C"
+```
+```
+python tools/evaluate.py \
+--result results/nnet2.test4.classify.pickle.gz \
+--features data/test4_FBANK_D_A.pfile \
+--info "DNN with dropout, test set D"
+```
+
+
+### Results ###
+
+| DNN type      | Test set      | Frame level error (%) | Phoneme level error (%) |
+|:-------------:|:-------------:| :--------------------:| :----------------------:|
+| baseline      | A             | 81.99                 | 70.63                   |
+| with dropout  | A             | 78.44                 | 65.66                   |
+| baseline      | B             | 88.64                 | 77.56                   |
+| with dropout  | B             | 86.59                 | 74.21                   |
+| baseline      | C             | 87.35                 | 75.83                   |
+| with dropout  | C             | 84.94                 | 72.00                   |
+| baseline      | D             | 87.44                 | 76.28                   |
+| with dropout  | D             | 85.07                 | 72.55                   |
+
+
