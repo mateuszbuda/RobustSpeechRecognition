@@ -263,5 +263,6 @@ python tools/evaluate.py \
 | with dropout  | C             | 84.94                 | 72.00                   |
 | baseline      | D             | 87.44                 | 76.28                   |
 | with dropout  | D             | 85.07                 | 72.55                   |
-
+| baseline      | AVG           | 86.36                 | 75.05                   |
+| with dropout  | AVG           | 83.51                 | 71.11                   |
 
