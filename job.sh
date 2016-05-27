@@ -10,7 +10,7 @@
 #SBATCH --mail-type=ALL
 
 # Maximum job elapsed time should be indicated whenever possible
-#SBATCH -t 06:30:00
+#SBATCH -t 04:00:00
 
 # Number of nodes that will be reserved for a given job
 #SBATCH --nodes=1
@@ -35,7 +35,7 @@ source modules_tegner
 --nnet-spec "792:2048:2048:2048:64" \
 --wdir ./nnet1 \
 --activation rectifier \
---lrate "C:0.16:15" \
+--lrate "C:0.1:15" \
 --momentum 0.9 \
 --batch-size 512 \
 --param-output-file nnet1/nnet1.mdl \
@@ -50,7 +50,7 @@ THEANO_FLAGS='device=gpu0' python $PDNNDIR/cmds/run_DNN.py \
 --ptr-layer-number 3 \
 --wdir ./nnet1/ \
 --activation rectifier \
---lrate "C:0.004:10" \
+--lrate "C:0.004:15" \
 --momentum 0.9 \
 --batch-size 512 \
 --param-output-file nnet1/nnet1.mdl \
@@ -104,7 +104,7 @@ THEANO_FLAGS='device=gpu1' python $PDNNDIR/cmds/run_DNN.py \
 --nnet-spec "792:2048:2048:2048:64" \
 --wdir ./nnet2 \
 --activation rectifier \
---lrate "C:0.16:15" \
+--lrate "C:0.1:15" \
 --momentum 0.9 \
 --batch-size 512 \
 --dropout-factor 0.2,0.2,0.2 \
@@ -120,7 +120,7 @@ THEANO_FLAGS='device=gpu1' python $PDNNDIR/cmds/run_DNN.py \
 --ptr-layer-number 3 \
 --wdir ./nnet2/ \
 --activation rectifier \
---lrate "C:0.004:10" \
+--lrate "C:0.004:15" \
 --momentum 0.9 \
 --batch-size 512 \
 --dropout-factor 0.2,0.2,0.2 \
