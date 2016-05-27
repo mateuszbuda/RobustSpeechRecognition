@@ -116,6 +116,11 @@ python tools/htk2pfile.py workdir4/test_align.mlf workdirt/state2id.lst FBANK_D_
 ./tools/normutts.sh workdir1/test_FBANK_D_A.pfile workdir2/test_FBANK_D_A.pfile workdir3/test_FBANK_D_A.pfile workdir4/test_FBANK_D_A.pfile
 ```
 
+```
+python tools/discountSilence.py workdirt/train_tr_FBANK_D_A.pfile
+python tools/discountSilence.py workdirt/train_va_FBANK_D_A.pfile
+```
+
 
 ### Tegner ###
 
