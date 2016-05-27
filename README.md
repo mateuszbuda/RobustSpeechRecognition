@@ -177,7 +177,7 @@ fastmath = True
 If you followed the steps above and have both `modules_tegner` and `job.sh` in your homedir, then just run:
 
 ```
-mkdir nnet1 nnet2
+mkdir nnet1 nnet2 results
 sbatch job.sh
 ```
 
