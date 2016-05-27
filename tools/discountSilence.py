@@ -43,7 +43,4 @@ for i in range(1, len(new_frame_ids)):
 	else:
 		new_frame_ids[i] = new_frame_ids[i - 1] + 1
 
-for i in range(0, 64):
-	print(str(i) + ": " + str(np.count_nonzero(new_frame_labels == i) / len(new_frame_labels)))
-
 pfile_write(filename, new_utt_ids, new_frame_ids, new_features, new_frame_labels)
