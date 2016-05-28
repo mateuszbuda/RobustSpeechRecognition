@@ -258,16 +258,17 @@ python tools/evaluate.py \
 
 ### Results ###
 
-| DNN type      | Test set      | Frame level error (%) | Phoneme level error (%) |
-|:-------------:|:-------------:| :--------------------:| :----------------------:|
-| baseline      | A             | 81.99                 | 70.63                   |
-| with dropout  | A             | 78.44                 | 65.66                   |
-| baseline      | B             | 88.64                 | 77.56                   |
-| with dropout  | B             | 86.59                 | 74.21                   |
-| baseline      | C             | 87.35                 | 75.83                   |
-| with dropout  | C             | 84.94                 | 72.00                   |
-| baseline      | D             | 87.44                 | 76.28                   |
-| with dropout  | D             | 85.07                 | 72.55                   |
-| baseline      | AVG           | 86.36                 | 75.05                   |
-| with dropout  | AVG           | 83.51                 | 71.11                   |
+#### Frame level accuracy ####
+
+| DNN type      | Test set A    | Test set B 	| Test set C 	 | Test set D 	| AVG 		|
+|:-------------:|:-------------:|:-------------:|:--------------:|:------------:|:---------:|
+| baseline      | 63.15         | 69.39         | 62.63          | 62.02 		| 64.30 	|
+| with dropout  | 50.00         | 54.03         | 51.66          | 52.89 		| 52.15 	|
+
+#### Phoneme level accuracy ####
+
+| DNN type      | Test set A    | Test set B 	| Test set C 	 | Test set D 	| AVG 		|
+|:-------------:|:-------------:|:-------------:|:--------------:|:------------:|:---------:|
+| baseline      | 54.40         | 58.92         | 55.03          | 54.16 		| 55.63 	|
+| with dropout  | 42.31         | 45.93         | 44.05          | 45.52 		| 44.45 	|
 
