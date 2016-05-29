@@ -34,7 +34,7 @@ source modules_tegner
 --valid-data "data/train_va_FBANK_D_A.pfile,context=5,random=true" \
 --nnet-spec "792:2048:2048:2048:64" \
 --wdir ./nnet1 \
---activation rectifier \
+--activation sigmoid \
 --lrate "C:0.1:15" \
 --momentum 0.9 \
 --batch-size 512 \
@@ -49,7 +49,7 @@ THEANO_FLAGS='device=gpu0' python $PDNNDIR/cmds/run_DNN.py \
 --ptr-file nnet1/nnet1.mdl \
 --ptr-layer-number 3 \
 --wdir ./nnet1/ \
---activation rectifier \
+--activation sigmoid \
 --lrate "C:0.004:15" \
 --momentum 0.9 \
 --batch-size 512 \
@@ -103,7 +103,7 @@ THEANO_FLAGS='device=gpu1' python $PDNNDIR/cmds/run_DNN.py \
 --valid-data "data/train_va_FBANK_D_A.pfile,context=5,random=true" \
 --nnet-spec "792:2048:2048:2048:64" \
 --wdir ./nnet2 \
---activation rectifier \
+--activation sigmoid \
 --lrate "C:0.1:15" \
 --momentum 0.9 \
 --batch-size 512 \
@@ -119,7 +119,7 @@ THEANO_FLAGS='device=gpu1' python $PDNNDIR/cmds/run_DNN.py \
 --ptr-file nnet2/nnet2.mdl \
 --ptr-layer-number 3 \
 --wdir ./nnet2/ \
---activation rectifier \
+--activation sigmoid \
 --lrate "C:0.004:15" \
 --momentum 0.9 \
 --batch-size 512 \
