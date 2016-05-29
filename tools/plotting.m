@@ -86,12 +86,19 @@ X = 1:length(training_err1);
 figure
 
 subplot(2, 1, 1)
-plot(X, training_err1, X, validation_err1)
+plot(X, training_err1, X, validation_err1, 'lineWidth', 3)
+
+set(gca, 'fontsize', 16)
 
 h = legend('trainign error', 'validation error');
-set(h, 'FontSize', 14);
+set(h, 'FontSize', 16);
 
 subplot(2, 1, 2)
-plot(X, training_err2, X, validation_err2)
+plot(X, training_err2, X, validation_err2, 'lineWidth', 3)
+
+set(gca, 'fontsize', 16)
+
+h = legend('trainign error', 'validation error');
+set(h, 'FontSize', 16);
 
 

@@ -42,6 +42,13 @@ month={May},}
 See `tools/modules_tegner`.
 
 
+### Quickstart ###
+
+If you have everything correctly setup, you should be able to generate all necessary files and start the training by running `justdoit.sh` script that just runs all command described below. It also assumes that you have two GPUs available and all dependencies installed and configured.
+
+The script `justdoit_tegner.sh` is adjusted to run it on tegner. It loades modules and enqueues the job to be run on the node with Tesla K80 GPU.
+
+
 ### Data ###
 
 ```
@@ -258,14 +265,14 @@ python tools/evaluate.py \
 
 ### Results ###
 
-#### Frame level accuracy ####
+#### Frame level error ####
 
 | DNN type      | Test set A    | Test set B 	| Test set C 	 | Test set D 	| AVG 		|
 |:-------------:|:-------------:|:-------------:|:--------------:|:------------:|:---------:|
 | baseline      | 63.15         | 69.39         | 62.63          | 62.02 		| 64.30 	|
 | with dropout  | 50.00         | 54.03         | 51.66          | 52.89 		| 52.15 	|
 
-#### Phoneme level accuracy ####
+#### Phoneme level error ####
 
 | DNN type      | Test set A    | Test set B 	| Test set C 	 | Test set D 	| AVG 		|
 |:-------------:|:-------------:|:-------------:|:--------------:|:------------:|:---------:|

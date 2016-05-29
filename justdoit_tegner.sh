@@ -1,3 +1,5 @@
+source tools/modules_tegner;
+
 python tools/htk2pfile.py workdirt/train_tr_align.mlf workdirt/state2id.lst FBANK_D_A workdirt/train_tr_FBANK_D_A.pfile;
 python tools/htk2pfile.py workdirt/train_va_align.mlf workdirt/state2id.lst FBANK_D_A workdirt/train_va_FBANK_D_A.pfile;
 python tools/htk2pfile.py workdir1/test_align.mlf workdirt/state2id.lst FBANK_D_A workdir1/test_FBANK_D_A.pfile;
@@ -19,4 +21,4 @@ mv workdir3/test_FBANK_D_A.pfile data/test3_FBANK_D_A.pfile;
 mv workdir4/test_FBANK_D_A.pfile data/test4_FBANK_D_A.pfile;
 
 mkdir nnet1 nnet2 results;
-job.sh;
+sbatch job.sh;
